@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  background-color: #fff;
+}
+
+header {
+  background-color: #f1c40f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+}
+
+.logo img {
+  height: 60px;
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.container {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  margin: 15px 0 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #aaa;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.taxi-img img {
+  margin: 30px 0;
+  width: 250px;
+}
+
+.preco {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #f1c40f;
+  padding: 15px 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color:  #6c5700;
+  transform: scale(1.1);
+}
+
+/* Estilo do mapa */
+#mapa-container {
+  margin: 20px 0;
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fdfdfd;
+  visibility: visible; /* garante que o contêiner seja visível */
+}
+
+#mapa {
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1;
+  display: block;
+}
+
+/* Oculta o container do mapa */
+.mapa-oculto {
+  display: none;
+}
+
+.fechar-mapa {
+  background-color: #f1c40f;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}

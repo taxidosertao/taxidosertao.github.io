@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Táxi do Sertão</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" /></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <form onsubmit="login(event)">
+        <h1>Fazer login</h1>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" placeholder="Digite seu e-mail" required />
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" placeholder="Digite sua senha" required />
+
+        <button type="submit" class="btn">Confirmar</button>
+        <p class="red-cadastro">
+            Não possui uma conta? <a href="cadastro.html">Cadastre-se</a> 
+        </p>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    function login(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const senha = document.getElementById("senha").value;
+
+      const usuarioSalvo = JSON.parse(sessionStorage.getItem("usuario"));
+
+      if (!usuarioSalvo) {
+        alert("Nenhum usuário cadastrado!");
+        return;
+      }
+
+      if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
+        alert("Login realizado com sucesso!");
+
+        // Salva novamente os dados para que o nome apareça
+        sessionStorage.setItem("usuario", JSON.stringify(usuarioSalvo));
+        sessionStorage.setItem("nomeUsuario", usuarioSalvo.nome);
+        sessionStorage.setItem("logado", "true");
+
+        window.location.href = "index.html";
+      } else {
+        alert("E-mail ou senha incorretos.");
+      }
+    }
+  </script>
+</body>
+</html>

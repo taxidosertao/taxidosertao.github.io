@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento - Táxi do Sertão</title>
+  <link rel="stylesheet" href="pagamento.css" />
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
+</head>
+<body>
+  <header>
+    <img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" class="logo">
+    <div class="menu-icon">&#9776;</div>
+  </header>
+
+  <main class="pagamento-container">
+    <h2>Escolha o método de pagamento:</h2>
+
+    <label><input type="radio" name="metodo" value="pix"> PIX</label>
+    <label><input type="radio" name="metodo" value="cartao"> CARTÃO DE CRÉDITO</label>
+
+    <div id="formPix" class="metodo oculto">
+      <h3>Pagamento via pix</h3>
+      <p>Escaneie o código QR abaixo para pagar com Pix:</p>
+      <img src="imagens/qrcodepix.png" alt="QR Code PIX" class="qrcode">
+      <input type="text" id="chavePix" value="2444666668888888" readonly />
+      <button onclick="copiarPix()">Copiar</button> <br> <br>
+      <button onclick="pagar()">Já fiz o pagamento</button>
+
+    </div>
+
+    <div id="formCartao" class="metodo oculto">
+      <h3>Pagamento via cartão de crédito</h3>
+      <label>Número do cartão:
+        <input type="text" placeholder="1234 5678 9012 3456" />
+      </label>
+      <label>Nome do titular:
+        <input type="text" />
+      </label>
+      <label>Data de validade (MM/AA):
+        <input type="text" />
+      </label>
+      <label>CVV:
+        <input type="text" />
+      </label>
+      <button>Confirma pagamento</button> <br> <br>
+      <button onclick="pagar()">Já fiz o pagamento</button>
+    </div>
+  </main>
+
+ 
+  <script>
+    const radios = document.getElementsByName("metodo");
+    const formPix = document.getElementById("formPix");
+    const formCartao = document.getElementById("formCartao");
+
+    radios.forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "pix") {
+          formPix.classList.remove("oculto");
+          formCartao.classList.add("oculto");
+        } else {
+          formCartao.classList.remove("oculto");
+          formPix.classList.add("oculto");
+        }
+      });
+    });
+
+    function copiarPix() {
+      const chave = document.getElementById("chavePix");
+      chave.select();
+      chave.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Chave Pix copiada!");
+    }
+
+    function pagar() {
+        window.location.href = "avaliar.html";
+    }
+  </script>
+</body>
+</html>

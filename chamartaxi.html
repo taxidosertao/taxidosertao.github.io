@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Táxi do Sertão</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="chamartaxi.css"/>
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
+</head>
+<body>
+
+<script>
+  const logado = sessionStorage.getItem("logado");
+  if (logado !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<header>
+  <div class="logo">
+    <a href="index.html"><img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" /></a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <label for="local">Local de encontro:</label>
+    <input type="text" id="local" placeholder="Meu local" readonly/>
+
+    <label for="destino">Destino :</label>
+    <input type="text" id="destino" placeholder="Clique para escolher no mapa" readonly/>
+
+    <div id="mapa-container" class="mapa-oculto">
+      <p class="fechar-mapa">Clique no mapa para escolher o destino</p>
+      <div id="mapa"></div>
+    </div>
+
+    <div class="taxi-img">
+      <img src="imagens/carrotaxi.png" alt="Imagem de Táxi" />
+    </div>
+
+    <p class="preco">R$ 00,00</p>
+    <a href="#" class="btn" id="confirmarCorrida">Chamar táxi</a>
+  </div>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const destinoInput = document.getElementById("destino");
+  const mapaContainer = document.getElementById("mapa-container");
+  const mapaDiv = document.getElementById("mapa");
+  const precoEl = document.querySelector(".preco");
+  const confirmarBtn = document.getElementById("confirmarCorrida");
+
+  let mapa, marcador;
+
+  const localOrigem = { lat: -6.2183, lng: -36.6825 }; // São Vicente - RN
+  let destinoLatLng = null;
+
+  function calcularDistancia(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  destinoInput.addEventListener("click", () => {
+    mapaContainer.classList.remove("mapa-oculto");
+    setTimeout(() => {
+      if (!mapa) {
+        iniciarMapa();
+      } else {
+        mapa.invalidateSize();
+      }
+    }, 500);
+  });
+
+  function iniciarMapa() {
+    const centro = [-6.2183, -36.6825];
+    mapa = L.map("mapa", { zoomControl: true }).setView(centro, 15);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap",
+    }).addTo(mapa);
+
+    mapa.on("click", function (e) {
+      const { lat, lng } = e.latlng;
+      destinoLatLng = { lat, lng };
+
+      if (marcador) {
+        marcador.setLatLng([lat, lng]);
+      } else {
+        marcador = L.marker([lat, lng]).addTo(mapa);
+      }
+
+      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+        .then(res => res.json())
+        .then(data => {
+          const address = data.address;
+          const rua = address.road || "";
+          const bairro = address.suburb || address.neighbourhood || "";
+          const cidade = address.city || address.town || address.village || "";
+          const estado = address.state || "";
+          const enderecoFinal = [rua, bairro, cidade, estado].filter(Boolean).join(", ");
+
+          destinoInput.value = enderecoFinal;
+          mapaContainer.classList.add("mapa-oculto");
+
+          const distancia = calcularDistancia(localOrigem.lat, localOrigem.lng, lat, lng);
+          const preco = Math.max(10, distancia * 3.5); // R$ 3.50/km, mínimo R$10
+          precoEl.textContent = `R$ ${preco.toFixed(2)}`;
+
+          // Salvar preço no sessionStorage
+          sessionStorage.setItem("preco", preco.toFixed(2));
+
+          alert("Destino selecionado com sucesso!");
+        })
+        .catch(() => {
+          destinoInput.value = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+          mapaContainer.classList.add("mapa-oculto");
+          alert("Erro ao buscar endereço. Coordenadas foram inseridas.");
+        });
+    });
+
+    setTimeout(() => mapa.invalidateSize(), 300);
+  }
+
+  const taxistas = [
+    {
+      nome: "José da Silva",
+      carro: "Fiat Uno",
+      cor: "Branco",
+      placa: "ABC-1234",
+      imagem: "imagens/uno.png"
+    },
+    {
+      nome: "Maria Oliveira",
+      carro: "Chevrolet Onix",
+      cor: "Preto",
+      placa: "DEF-5678",
+      imagem: "imagens/onix.png"
+    },
+    {
+      nome: "Pedro Santos",
+      carro: "Renault Kwid",
+      cor: "Prata",
+      placa: "GHI-9101",
+      imagem: "imagens/kwid.png"
+    }
+  ];
+
+  confirmarBtn.addEventListener("click", () => {
+    if (!destinoInput.value) {
+      alert("Escolha um destino antes de chamar o táxi.");
+      return;
+    }
+
+    const escolhido = taxistas[Math.floor(Math.random() * taxistas.length)];
+    sessionStorage.setItem("taxista", JSON.stringify(escolhido));
+    sessionStorage.setItem("destino", destinoInput.value);
+
+    window.location.href = "corrida.html";
+  });
+
+  
+
+</script>
+</body>
+</html>

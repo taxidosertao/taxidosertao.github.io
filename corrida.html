@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corrida em andamento</title>
+  <link rel="stylesheet" href="corrida.css"/>
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html"><img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" /></a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Indo te buscar...</h2>
+  
+      <div class="carro-img">
+        <img id="imagemCarro" src="" alt="Imagem do carro" />
+      </div>
+  
+      <p><strong id="modeloCarro"></strong> &nbsp; • &nbsp; <strong id="corCarro"></strong></p>
+      <p>Placa: <strong id="placaCarro"></strong></p>
+      <p><strong id="nomeTaxista"></strong></p>
+      <p>2 Min de distância</p>
+  
+      <div class="estrelas">
+        <img src="imagens/estrelas.png" alt="Estrela" />
+      </div>
+
+      <p id="valorCorrida" style="font-size: 18px; margin-top: 10px;"><strong>Valor da corrida:</strong> R$ 00,00</p>
+  
+      <a href="index.html" class="btn cancelar">Cancelar corrida</a>
+    </div>
+  </main>
+  
+  <script>
+    const taxista = JSON.parse(sessionStorage.getItem("taxista"));
+  
+    if (!taxista) {
+      alert("Nenhuma corrida encontrada.");
+      window.location.href = "index.html";
+    } else {
+      document.getElementById("imagemCarro").src = taxista.imagem;
+      document.getElementById("modeloCarro").textContent = taxista.carro;
+      document.getElementById("corCarro").textContent = taxista.cor;
+      document.getElementById("placaCarro").textContent = taxista.placa;
+      document.getElementById("nomeTaxista").textContent = taxista.nome;
+    }
+  </script>
+
+<script>
+  // Recuperar valor do sessionStorage
+  const preco = sessionStorage.getItem("preco");
+
+  // Atualizar texto na tela
+  if (preco) {
+    document.getElementById("valorCorrida").textContent = `Valor da corrida: R$ ${parseFloat(preco).toFixed(2)}`;
+  }
+</script>
+
+<script>
+  setTimeout(() => {
+    window.location.href = "pagamento.html";
+  }, 10000);
+</script>
+
+</body>
+</html>

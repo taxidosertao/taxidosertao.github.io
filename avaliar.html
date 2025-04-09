@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Avaliar Motorista</title>
+  <link rel="stylesheet" href="avaliar.css" />
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
+</head>
+<body>
+  <header>
+    <div class="logo">
+    <a href="index.html"><img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" /></a>
+    </div>
+
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Avaliar motorista.</h1>
+      <p>Nos diga como foi sua experiência</p>
+
+      <div class="estrelas" id="avaliacao">
+        <span class="estrela" data-value="1">★</span>
+        <span class="estrela" data-value="2">★</span>
+        <span class="estrela" data-value="3">★</span>
+        <span class="estrela" data-value="4">★</span>
+        <span class="estrela" data-value="5">★</span>
+      </div>
+
+      <textarea placeholder="Escreva um comentário (opcional)"></textarea>
+      <button onclick="avaliar()">Enviar Avaliação</button>
+    </div>
+  </main>
+
+  <script>
+    const estrelas = document.querySelectorAll(".estrela");
+    let avaliacao = 0;
+
+    estrelas.forEach(estrela => {
+      estrela.addEventListener("click", () => {
+        avaliacao = parseInt(estrela.getAttribute("data-value"));
+        atualizarEstrelas(avaliacao);
+      });
+
+      estrela.addEventListener("mouseover", () => {
+        const valor = parseInt(estrela.getAttribute("data-value"));
+        atualizarEstrelas(valor);
+      });
+
+      estrela.addEventListener("mouseout", () => {
+        atualizarEstrelas(avaliacao);
+      });
+    });
+
+    function atualizarEstrelas(valor) {
+      estrelas.forEach(estrela => {
+        const starValue = parseInt(estrela.getAttribute("data-value"));
+        estrela.classList.toggle("ativa", starValue <= valor);
+      });
+
+    }
+
+    function avaliar() {
+        window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

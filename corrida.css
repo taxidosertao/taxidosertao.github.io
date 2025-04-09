@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+  
+  header {
+    background-color: #f1c40f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+  }
+  
+  .logo img {
+    height: 60px;
+  }
+  
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .container {
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .carro-img img {
+    width: 300px;
+    margin: 20px 0;
+  }
+  
+  p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .estrelas img {
+    width: 200px;
+    margin: 5px;
+  }
+  
+  .btn.cancelar {
+    margin-top: 30px;
+    display: inline-block;
+    background-color: #f1c40f;
+    color: black;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+  }
+
+  .btn.cancelar:hover {
+    background-color: #6c5700;
+    transform: scale(1.1);
+  }
+  

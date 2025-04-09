@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Táxi do Sertão</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="imagens/logotaxi.png" alt="Táxi do Sertão" />
+    </div>
+    <h1 id="mensagem"></h1>
+
+    <div class="botoes-header">
+      <button id="btn-login" onclick="fazerLogin()">Fazer Login</button>
+      <button id="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <img src="imagens/fundotaxi.png" class="blur-fundo" />
+
+  <main>
+    <div class="content">
+      <h1><span class="bold">TÁXI</span><br><span class="bold">DO SERTÃO</span></h1>
+      <h2>VIAGENS E TRANSPORTES</h2>
+      <button class="btn" onclick="chamartaxi()">Chamar táxi</button>
+    </div>
+  </main>
+
+  <script>
+    // Função que redireciona o usuário para a página de login
+    function fazerLogin() {
+      window.location.href = "login.html";
+    }
+
+    // Função de logout: remove os dados do usuário da sessão e recarrega a página
+    function logout() {
+      // Remove os dados de login da sessão
+      sessionStorage.removeItem("logado");
+      sessionStorage.removeItem("nomeUsuario");
+
+      // Redireciona para a página inicial (index.html)
+      window.location.href = "index.html";
+    }
+
+    // Função que redireciona o usuário para a página de chamar táxi
+    function chamartaxi() {
+      window.location.href = "chamartaxi.html";
+    }
+
+    // Verifica se o usuário está logado ao carregar a página
+    const estaLogado = sessionStorage.getItem("logado") === "true"; // retorna true se o valor for "true"
+    const nome = sessionStorage.getItem("nomeUsuario"); // recupera o nome do usuário salvo na sessão
+
+    // Seleciona os elementos da página para manipular depois
+    const mensagem = document.getElementById("mensagem");        // elemento onde aparece "Olá, [nome]"
+    const btnLogin = document.getElementById("btn-login");       // botão de login
+    const btnLogout = document.getElementById("btn-logout");     // botão de logout
+
+    // Se o usuário estiver logado e o nome estiver disponível...
+    if (estaLogado && nome) {
+      // Exibe mensagem de boas-vindas
+      mensagem.textContent = `Olá, ${nome}!`;
+
+      // Esconde o botão de login e mostra o botão de logout
+      btnLogin.style.display = "none";
+      btnLogout.style.display = "inline-block";
+    } else {
+      // Se não estiver logado, esconde a mensagem e mostra apenas o botão de login
+      mensagem.textContent = "";
+      btnLogin.style.display = "inline-block";
+      btnLogout.style.display = "none";
+    }
+
+    // Função que ajusta o layout com base no tamanho da tela
+    function ajustarLayout() {
+      // Se a largura for menor que 768px, considera como mobile
+      if (window.innerWidth < 768) {
+        document.body.classList.add("mobile"); // aplica estilos específicos para mobile
+      } else {
+        document.body.classList.remove("mobile"); // remove a classe mobile para telas maiores
+      }
+    }
+
+    // Executa a função de ajuste quando a tela for redimensionada
+    window.addEventListener("resize", ajustarLayout);
+
+    // Executa a função assim que a página carregar
+    window.addEventListener("load", ajustarLayout);
+</script>
+</body>
+</html>

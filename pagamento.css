@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+  
+  header {
+    background-color: #f1c40f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .pagamento-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #fdfdfd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin: 15px 0;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #f1c40f;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px #999;
+    transition: transform 0.2s ease;
+  }
+  
+  button:hover {
+    background-color:#6c5700;
+    transform: scale(1.1);
+  } 
+  
+  .qrcode {
+    width: 200px;
+    margin: 15px auto;
+  }
+  
+  .oculto {
+    display: none;
+  }
+  

@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    background-color: #f1c40f;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+  }
+
+  .botoes-header {
+    background-color: #f1c40f;
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+    transition: transform 0.2s ease;
+  }
+
+
+
+  header .mensagem {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #000;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+  
+  main {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 12px;
+  }
+  
+  .bold {
+    font-weight: 900;
+    font-size: 48px;
+  }
+  
+  h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin: 20px 0;
+  }
+  
+  button {
+    background-color: #f1c40f;
+    padding: 15px 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    display: inline-block;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #6c5700;
+    transform: scale(1.1);
+  }
+
+  .blur-fundo {
+    width: 100%;
+    height: auto;
+    filter: blur(8px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* manda pro fundo */
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+    }
+  }
