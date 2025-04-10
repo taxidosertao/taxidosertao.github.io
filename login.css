@@ -1,83 +1,104 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, html {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    height: 100vh;
-  }
-  
-  header {
-    background-color: #f1c40f;
-    padding: 10px 0;
-    text-align: center;
-  }
-  
-  .logo img {
-    height: 60px;
-  }
-  
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px);
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  height: 100vh;
+  font-size: 16px;
+}
+
+header {
+  background-color: #f1c40f;
+  padding: 0.625rem 0;
+  text-align: center;
+}
+
+.logo img {
+  height: 3.75rem; /* 60px */
+  max-width: 100%;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 6.25rem); /* 100px */
+  padding: 1rem;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 0.9375rem; /* 15px */
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.2);
+  max-width: 25rem; /* 400px */
+  width: 100%;
+  margin: 3.125rem auto;
+}
+
+.form-container h1 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+.form-container .red-cadastro a {
+  color: #f1c40f;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* 20px */
+}
+
+label {
+  text-align: left;
+  font-size: 1.125rem;
+}
+
+input {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid #444;
+  background-color: #d9d9d9;
+  font-size: 1rem;
+}
+
+.btn {
+  background-color: #f1c40f;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.125rem;
+  padding: 0.9375rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #6c5700;
+  transform: scale(1.1);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
   .form-container {
-    background-color: rgba(255, 255, 255, 0.8); /* branco com transparência */
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    margin: 50px auto;
+    padding: 1.5rem;
+    margin: 2rem auto;
   }
 
   .form-container h1 {
-    text-align: center;
+    font-size: 1.5rem;
   }
 
- .form-container .red-cadastro a {
-    color: #f1c40f;
- }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  label {
-    text-align: left;
-    font-size: 18px;
-  }
-  
-  input {
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid #444;
-    background-color: #d9d9d9;
-    font-size: 16px;
-  }
-  
+  input,
   .btn {
-    background-color: #f1c40f;
-    color: #000;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
+    font-size: 1rem;
   }
-
-  .btn:hover {
-    background-color:#6c5700;
-    transform: scale(1.1);
-  } 
-  
+}

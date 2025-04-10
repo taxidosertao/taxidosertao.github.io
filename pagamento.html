@@ -10,7 +10,6 @@
 <body>
   <header>
     <img src="imagens/logotaxi.png" alt="Logo Táxi do Sertão" class="logo">
-    <div class="menu-icon">&#9776;</div>
   </header>
 
   <main class="pagamento-container">
@@ -50,33 +49,42 @@
 
  
   <script>
-    const radios = document.getElementsByName("metodo");
-    const formPix = document.getElementById("formPix");
-    const formCartao = document.getElementById("formCartao");
+    // Seleciona todos os inputs do tipo rádio com o nome "metodo"
+const radios = document.getElementsByName("metodo");
 
-    radios.forEach(radio => {
-      radio.addEventListener("change", () => {
-        if (radio.value === "pix") {
-          formPix.classList.remove("oculto");
-          formCartao.classList.add("oculto");
-        } else {
-          formCartao.classList.remove("oculto");
-          formPix.classList.add("oculto");
-        }
-      });
-    });
+// Seleciona os formulários de pagamento por Pix e Cartão
+const formPix = document.getElementById("formPix");
+const formCartao = document.getElementById("formCartao");
 
-    function copiarPix() {
-      const chave = document.getElementById("chavePix");
-      chave.select();
-      chave.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      alert("Chave Pix copiada!");
+// Adiciona um evento a cada botão de rádio para detectar mudança
+radios.forEach(radio => {
+  radio.addEventListener("change", () => {
+    // Se o valor selecionado for "pix", mostra o formulário do Pix e esconde o do cartão
+    if (radio.value === "pix") {
+      formPix.classList.remove("oculto");      // mostra Pix
+      formCartao.classList.add("oculto");      // esconde Cartão
+    } else {
+      formCartao.classList.remove("oculto");   // mostra Cartão
+      formPix.classList.add("oculto");         // esconde Pix
     }
+  });
+});
 
-    function pagar() {
-        window.location.href = "avaliar.html";
-    }
+// Função que copia a chave Pix para a área de transferência
+function copiarPix() {
+  const chave = document.getElementById("chavePix");
+  chave.select();                              // seleciona o texto da chave
+  chave.setSelectionRange(0, 99999);           // garante que toda a chave seja selecionada
+  document.execCommand("copy");                // copia o texto selecionado
+  alert("Chave Pix copiada!");                 // alerta o usuário
+}
+
+// Função chamada ao clicar no botão "Pagar"
+// Redireciona o usuário para a página de avaliação
+function pagar() {
+  window.location.href = "avaliar.html";
+}
+
   </script>
 </body>
 </html>

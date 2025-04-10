@@ -1,103 +1,130 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, html {
-    font-family: Arial, sans-serif;
-    height: 100%;
-    background-color: #fff;
-  }
-  
-  header {
-    background-color: #f1c40f;
-    padding: 15px 0;
-    text-align: center;
-  }
-  
-  .logo img {
-    height: 60px;
-  }
-  
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: Arial, sans-serif;
+  height: 100%;
+  background-color: #fff;
+  font-size: 16px;
+}
+
+header {
+  background-color: #f1c40f;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.logo img {
+  height: 3.75rem; /* 60px */
+  max-width: 100%;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1.25rem; /* 40px 20px */
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 0.9375rem; /* 15px */
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.2);
+  max-width: 25rem; /* 400px */
+  width: 100%;
+  margin: 3.125rem auto; /* 50px */
+}
+
+.form-container h1 {
+  text-align: center;
+  font-size: 1.75rem;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 1.125rem;
+  margin: 1.25rem 0 0.3125rem; /* 20px 0 5px */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.625rem;
+  background-color: #ddd;
+  border: 1px solid #aaa;
+  border-radius: 0.625rem; /* 10px */
+  font-size: 1rem;
+}
+
+.contato-box {
+  display: flex;
+  align-items: center;
+  background-color: #ddd;
+  border-radius: 0.625rem;
+  overflow: hidden;
+  border: 1px solid #aaa;
+}
+
+.contato-box .flag {
+  width: 2.5rem; /* 40px */
+  height: auto;
+  margin-left: 0.3125rem; /* 5px */
+  max-width: 100%;
+}
+
+.contato-box input {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  padding: 0.625rem;
+  flex: 1;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1.875rem; /* 30px */
+  background-color: #f1c40f;
+  color: black;
+  font-weight: bold;
+  padding: 0.9375rem 1.875rem; /* 15px 30px */
+  margin-left: auto;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  background-color: #6c5700;
+  transform: scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
   .form-container {
-    background-color: rgba(255, 255, 255, 0.8); /* branco com transparência */
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    margin: 50px auto;
+    padding: 1.5rem;
+    margin: 2rem auto;
   }
 
   .form-container h1 {
-    text-align: center;
-  }
-  
-  label {
-    display: block;
-    text-align: left;
-    font-size: 18px;
-    margin: 20px 0 5px;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #ddd;
-    border: 1px solid #aaa;
-    border-radius: 10px;
-    font-size: 16px;
-  }
-  
-  .contato-box {
-    display: flex;
-    align-items: center;
-    background-color: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid #aaa;
-  }
-  
-  .contato-box .flag {
-    width: 40px;
-    height: auto;
-    margin-left: 5px;
-  }
-  
-  .contato-box input {
-    border: none;
-    background: none;
-    font-size: 16px;
-    padding: 10px;
-    flex: 1;
-  }
-  
-  .btn {
-    display: inline-block;
-    margin-top: 30px;
-    background-color: #f1c40f;
-    color: black;
-    font-weight: bold;
-    padding: 15px 30px;
-    margin-left: 100px;
-    border-radius: 8px;
-    text-decoration: none;
-    cursor: pointer;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
+    font-size: 1.5rem;
   }
 
-  .btn:hover {
-    background-color:#6c5700;
-    transform: scale(1.1);
-  } 
-  
+  label {
+    font-size: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-left: 0;
+    text-align: center;
+  }
+}

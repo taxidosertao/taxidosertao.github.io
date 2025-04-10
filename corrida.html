@@ -38,35 +38,37 @@
   </main>
   
   <script>
-    const taxista = JSON.parse(sessionStorage.getItem("taxista"));
-  
-    if (!taxista) {
-      alert("Nenhuma corrida encontrada.");
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("imagemCarro").src = taxista.imagem;
-      document.getElementById("modeloCarro").textContent = taxista.carro;
-      document.getElementById("corCarro").textContent = taxista.cor;
-      document.getElementById("placaCarro").textContent = taxista.placa;
-      document.getElementById("nomeTaxista").textContent = taxista.nome;
-    }
-  </script>
+// Recupera os dados do taxista do sessionStorage
+const taxista = JSON.parse(sessionStorage.getItem("taxista"));
 
-<script>
-  // Recuperar valor do sessionStorage
-  const preco = sessionStorage.getItem("preco");
+// Verifica se existe corrida salva
+if (!taxista) {
+  alert("Nenhuma corrida encontrada.");
+  window.location.href = "index.html"; // Redireciona se não houver
+} else {
+  // Preenche as informações do taxista na página
+  document.getElementById("imagemCarro").src = taxista.imagem;
+  document.getElementById("modeloCarro").textContent = taxista.carro;
+  document.getElementById("corCarro").textContent = taxista.cor;
+  document.getElementById("placaCarro").textContent = taxista.placa;
+  document.getElementById("nomeTaxista").textContent = taxista.nome;
+}
 
-  // Atualizar texto na tela
-  if (preco) {
-    document.getElementById("valorCorrida").textContent = `Valor da corrida: R$ ${parseFloat(preco).toFixed(2)}`;
-  }
+// Recupera o preço da corrida
+const preco = sessionStorage.getItem("preco");
+
+// Mostra o preço na tela, se existir
+if (preco) {
+  document.getElementById("valorCorrida").textContent =
+    `Valor da corrida: R$ ${parseFloat(preco).toFixed(2)}`;
+}
+
+// Redireciona automaticamente para a tela de pagamento após 10 segundos
+setTimeout(() => {
+  window.location.href = "pagamento.html";
+}, 10000);
 </script>
 
-<script>
-  setTimeout(() => {
-    window.location.href = "pagamento.html";
-  }, 10000);
-</script>
 
 </body>
 </html>

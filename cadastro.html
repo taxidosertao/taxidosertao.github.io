@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self';">
   <title>Cadastro - Táxi do Sertão</title>
   <link rel="stylesheet" href="cadastro.css"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self';">
+  <link rel="icon" type="image/png" href="imagens/logotaxi.png">
 </head>
 <body>
   <header>
@@ -17,7 +18,7 @@
   <main>
     <div class="form-container">
       <h1>Cadastre-se</h1>
-      <form onsubmit="cadastrar(event)">
+      <form id="formCadastro">
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" placeholder="Digite seu nome completo" required />
 
@@ -38,39 +39,7 @@
     </div>
   </main>
 
-  <script>
-    function cadastrar(event) {
-      event.preventDefault();
-
-      const nome = document.getElementById("nome").value.trim();
-      const contato = document.getElementById("contato").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const senha = document.getElementById("senha").value;
-
-      if (!nome || !contato || !email || !senha) {
-        alert("Preencha todos os campos!");
-        return;
-      }
-
-      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("E-mail inválido!");
-        return;
-      }
-
-      if (senha.length < 6) {
-        alert("A senha deve ter no mínimo 6 caracteres.");
-        return;
-      }
-
-      const usuario = { nome, contato, email, senha };
-
-      sessionStorage.setItem("usuario", JSON.stringify(usuario));
-      sessionStorage.setItem("nomeUsuario", nome);
-
-      alert("Cadastro realizado com sucesso!");
-      window.location.href = "login.html";
-    }
-  </script>
+  
+  <script src="cadastro.js"></script>
 </body>
 </html>

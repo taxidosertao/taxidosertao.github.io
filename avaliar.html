@@ -34,36 +34,48 @@
   </main>
 
   <script>
-    const estrelas = document.querySelectorAll(".estrela");
-    let avaliacao = 0;
+    // Seleciona todas as estrelas da avaliação
+const estrelas = document.querySelectorAll(".estrela");
 
-    estrelas.forEach(estrela => {
-      estrela.addEventListener("click", () => {
-        avaliacao = parseInt(estrela.getAttribute("data-value"));
-        atualizarEstrelas(avaliacao);
-      });
+// Variável para armazenar a nota escolhida pelo usuário (de 1 a 5)
+let avaliacao = 0;
 
-      estrela.addEventListener("mouseover", () => {
-        const valor = parseInt(estrela.getAttribute("data-value"));
-        atualizarEstrelas(valor);
-      });
+// Para cada estrela:
+estrelas.forEach(estrela => {
+  
+  // Quando o usuário clicar em uma estrela:
+  estrela.addEventListener("click", () => {
+    avaliacao = parseInt(estrela.getAttribute("data-value")); // pega o valor da estrela clicada
+    atualizarEstrelas(avaliacao);                             // atualiza visualmente as estrelas marcadas
+  });
 
-      estrela.addEventListener("mouseout", () => {
-        atualizarEstrelas(avaliacao);
-      });
-    });
+  // Quando o usuário passar o mouse sobre uma estrela:
+  estrela.addEventListener("mouseover", () => {
+    const valor = parseInt(estrela.getAttribute("data-value")); // pega o valor da estrela sobrevoada
+    atualizarEstrelas(valor);                                   // mostra a quantidade de estrelas temporariamente
+  });
 
-    function atualizarEstrelas(valor) {
-      estrelas.forEach(estrela => {
-        const starValue = parseInt(estrela.getAttribute("data-value"));
-        estrela.classList.toggle("ativa", starValue <= valor);
-      });
+  // Quando o mouse sair de cima das estrelas:
+  estrela.addEventListener("mouseout", () => {
+    atualizarEstrelas(avaliacao); // volta a mostrar a nota selecionada originalmente
+  });
+});
 
-    }
+// Atualiza a aparência das estrelas com base no valor passado
+function atualizarEstrelas(valor) {
+  estrelas.forEach(estrela => {
+    const starValue = parseInt(estrela.getAttribute("data-value"));
+    // Adiciona a classe "ativa" se a estrela for menor ou igual ao valor passado
+    estrela.classList.toggle("ativa", starValue <= valor);
+  });
+}
 
-    function avaliar() {
-        window.location.href = "index.html";
-    }
+// Função chamada quando o botão de "Enviar avaliação" for clicado
+// Redireciona o usuário de volta para a página inicial
+function avaliar() {
+  window.location.href = "index.html";
+}
+
   </script>
 </body>
 </html>
