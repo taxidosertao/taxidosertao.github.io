@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cadastro - Táxi do Sertão</title>
-  <link rel="stylesheet" href="cadastro.css"/> 
+  <link rel="stylesheet" href="cadastro.css"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self';">
 </head>
 <body>
   <header>
@@ -16,30 +17,34 @@
   <main>
     <div class="form-container">
       <h1>Cadastre-se</h1>
-      <label for="nome">Nome completo:</label>
-      <input type="text" id="nome" placeholder="Digite seu nome completo" />
+      <form onsubmit="cadastrar(event)">
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome completo" required />
 
-      <label for="contato">Contato:</label>
-      <div class="contato-box">
-        <img src="imagens/bandeirabrasil.png" alt="Bandeira do Brasil" class="flag" />
-        <input type="tel" id="contato" value="+55" />
-      </div>
+        <label for="contato">Contato:</label>
+        <div class="contato-box">
+          <img src="imagens/bandeirabrasil.png" alt="Bandeira do Brasil" class="flag" />
+          <input type="tel" id="contato" value="+55" required />
+        </div>
 
-      <label for="email">E-mail:</label>
-      <input type="email" id="email" placeholder="Digite seu e-mail" />
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" placeholder="Digite seu e-mail" required autocomplete="off" />
 
-      <label for="senha">Senha:</label>
-      <input type="password" id="senha" placeholder="Crie uma senha" />
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" placeholder="Crie uma senha" required minlength="6" autocomplete="new-password" />
 
-      <button class="btn" onclick="cadastrar()">Confirmar</button>
+        <button class="btn" type="submit">Confirmar</button>
+      </form>
     </div>
   </main>
 
   <script>
-    function cadastrar() {
-      const nome = document.getElementById("nome").value;
-      const contato = document.getElementById("contato").value;
-      const email = document.getElementById("email").value;
+    function cadastrar(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const contato = document.getElementById("contato").value.trim();
+      const email = document.getElementById("email").value.trim();
       const senha = document.getElementById("senha").value;
 
       if (!nome || !contato || !email || !senha) {
@@ -47,11 +52,21 @@
         return;
       }
 
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("E-mail inválido!");
+        return;
+      }
+
+      if (senha.length < 6) {
+        alert("A senha deve ter no mínimo 6 caracteres.");
+        return;
+      }
+
       const usuario = { nome, contato, email, senha };
 
-      // Salva o usuário no sessionStorage
       sessionStorage.setItem("usuario", JSON.stringify(usuario));
-      sessionStorage.setItem("nomeUsuario", nome); // manter esse se quiser mostrar depois
+      sessionStorage.setItem("nomeUsuario", nome);
 
       alert("Cadastro realizado com sucesso!");
       window.location.href = "login.html";

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login - Táxi do Sertão</title>
   <link rel="stylesheet" href="login.css" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self';">
 </head>
 <body>
   <header>
@@ -18,10 +19,10 @@
       <form onsubmit="login(event)">
         <h1>Fazer login</h1>
         <label for="email">E-mail:</label>
-        <input type="email" id="email" placeholder="Digite seu e-mail" required />
+        <input type="email" id="email" placeholder="Digite seu e-mail" required autocomplete="off" />
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" placeholder="Digite sua senha" required />
+        <input type="password" id="senha" placeholder="Digite sua senha" required autocomplete="off" />
 
         <button type="submit" class="btn">Confirmar</button>
         <p class="red-cadastro">
@@ -35,8 +36,14 @@
     function login(event) {
       event.preventDefault();
 
-      const email = document.getElementById("email").value;
-      const senha = document.getElementById("senha").value;
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+
+      const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("E-mail inválido!");
+        return;
+      }
 
       const usuarioSalvo = JSON.parse(sessionStorage.getItem("usuario"));
 
@@ -47,8 +54,6 @@
 
       if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
         alert("Login realizado com sucesso!");
-
-        // Salva novamente os dados para que o nome apareça
         sessionStorage.setItem("usuario", JSON.stringify(usuarioSalvo));
         sessionStorage.setItem("nomeUsuario", usuarioSalvo.nome);
         sessionStorage.setItem("logado", "true");
